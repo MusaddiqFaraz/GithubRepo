@@ -30,7 +30,6 @@ interface AppComponent {
         fun build(): AppComponent
 
 
-
     }
 
     fun inject(githubRepoApp: GithubRepoApp)
