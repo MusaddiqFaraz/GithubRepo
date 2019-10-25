@@ -38,6 +38,11 @@ dependencies {
     implementation deps.coroutines.android
     implementation deps.coroutines.core
 
+    //lifecycle ext
+    implementation deps.lifecycle.ext
+    implementation deps.lifecycle.livedata
+    implementation deps.lifecycle.viewmodel
+
     //dagger
     implementation deps.dagger.android
     implementation deps.dagger.android_support
