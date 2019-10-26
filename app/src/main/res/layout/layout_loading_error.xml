@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:id="@+id/ivErrorLoading"
+        android:src="@drawable/nointernet_connection"/>
+
+    <TextView
+        style="@style/TextBold"
+        android:layout_below="@+id/ivErrorLoading"
+        android:layout_marginTop="@dimen/spacing_xlarge"
+        android:id="@+id/tvErrorHeading"
+        android:layout_centerHorizontal="true"
+        android:text="@string/error_heading"/>
+
+
+    <TextView
+        style="@style/TextDescription"
+        android:layout_below="@+id/tvErrorHeading"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_centerHorizontal="true"
+        android:text="@string/error_desc"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_small"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/btnRetry"
+        android:layout_margin="@dimen/spacing_medium"
+        android:background="@drawable/rounded_button_bg"
+        android:text="@string/retry"
+        android:textSize="@dimen/textsize_medium"
+        android:textColor="@color/color_button_text"
+        android:fontFamily="@font/roboto_medium"/>
+
+
+</RelativeLayout>
