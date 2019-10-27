@@ -7,6 +7,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.repo.R
 import com.example.repo.RVAdapter
@@ -57,7 +58,6 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         getTrendingRepo()
 
 
-
     }
 
     private fun getTrendingRepo(forceFetch: Boolean = false) {
@@ -67,14 +67,15 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 Resource.Status.SUCCESS -> {
                     Log.e(TAG,"success  ${result.data?.size}  ")
 
-                    CoroutineScope(Dispatchers.Main).launch {
+
                         result.data?.let {
-                            showUI(result.status)
-                            trendingRepos.clear()
-                            trendingRepos.addAll(it)
-                            repoAdapter.notifyDataSetChanged()
+                            if (it.isNotEmpty()) {
+                                showUI(result.status)
+                                trendingRepos.clear()
+                                trendingRepos.addAll(it)
+                                repoAdapter.notifyDataSetChanged()
+                            }
                         }
-                    }
 
                 }
                 Resource.Status.ERROR -> {
@@ -88,6 +89,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 }
                 Resource.Status.LOADING ->  {
                     Log.e(TAG,"loading ${result.message}  ")
+                    showUI(result.status)
                 }
             }
         })
@@ -117,7 +119,6 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 }
             )
 
-        rvList.layoutManager = LinearLayoutManager(this)
         rvList.adapter = repoAdapter
         repoAdapter.notifyDataSetChanged()
     }
@@ -126,6 +127,11 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     private fun showUI(status: Resource.Status) {
         layoutError.visibility = if(status == Resource.Status.ERROR) View.VISIBLE else View.GONE
         rvList.visibility = if(status == Resource.Status.SUCCESS) View.VISIBLE else View.GONE
+        loadingView.visibility = if(status == Resource.Status.LOADING) View.VISIBLE else View.GONE
+        if(status == Resource.Status.LOADING)
+            loadingView.startShimmerAnimation()
+        else
+            loadingView.stopShimmerAnimation()
     }
 
 
