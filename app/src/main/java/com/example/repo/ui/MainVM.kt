@@ -13,9 +13,9 @@ class MainVM  @Inject constructor(private val trendingRepoRepository: TrendingRe
 
     var trendingRepos: LiveData<Resource<List<TrendingRepo>>>? = null
 
-    fun getTrendingRepos(forceFetch: Boolean  = false): LiveData<Resource<List<TrendingRepo>>>? {
+    fun getTrendingRepos(forceFetch: Boolean): LiveData<Resource<List<TrendingRepo>>>? {
         if (trendingRepos == null || forceFetch) {
-            trendingRepos = trendingRepoRepository.getTrendingRepo()
+            trendingRepos = trendingRepoRepository.getTrendingRepo(forceFetch)
         }
 
         return  trendingRepos

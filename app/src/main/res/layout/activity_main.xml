@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,8 +10,7 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/layout_toolbar"
-        />
+        layout="@layout/layout_toolbar" />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/loadingView"
@@ -26,34 +25,48 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <include layout="@layout/layout_dummy" />
+
             <include layout="@layout/layout_dummy" />
+
             <include layout="@layout/layout_dummy" />
+
             <include layout="@layout/layout_dummy" />
+
             <include layout="@layout/layout_dummy" />
+
             <include layout="@layout/layout_dummy" />
+
             <include layout="@layout/layout_dummy" />
+
             <include layout="@layout/layout_dummy" />
+
             <include layout="@layout/layout_dummy" />
         </LinearLayout>
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvList"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:itemCount="12"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/rv_repo_item" />
+        android:id="@+id/srlList">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="12"
+            tools:listitem="@layout/rv_repo_item" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 
     <include
-        layout="@layout/layout_loading_error"
         android:id="@+id/layoutError"
-        android:visibility="gone"
-        />
-
+        layout="@layout/layout_loading_error"
+        android:visibility="gone" />
 
 
 </LinearLayout>

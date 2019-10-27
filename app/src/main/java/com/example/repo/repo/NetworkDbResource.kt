@@ -29,6 +29,7 @@ fun <T, A> resultLiveData(databaseQuery: () -> LiveData<T>,
 
         val source = databaseQuery().map {
             Resource.success(it)
+
         }
 
         emitSource(source)
