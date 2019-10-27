@@ -3,10 +3,11 @@ package com.example.repo.ui
 import androidx.lifecycle.ViewModel
 import com.example.repo.githubapi.GithubApi
 import com.example.repo.repo.GitHubRepoDataSource
+import com.example.repo.repo.TrendingRepoRepository
 import javax.inject.Inject
 
-class MainVM  @Inject constructor(val gitHubRepoDataSource: GitHubRepoDataSource) : ViewModel() {
+class MainVM  @Inject constructor(private val trendingRepoRepository: TrendingRepoRepository) : ViewModel() {
 
-    suspend fun getTrendingRepos() = gitHubRepoDataSource.getTrendingRepo()
+    val trendingRepos by lazy { trendingRepoRepository.getTrendingRepo() }
 
 }

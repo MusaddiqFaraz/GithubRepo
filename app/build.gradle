@@ -47,6 +47,12 @@ dependencies {
     implementation deps.glide.core
     kapt deps.glide.compiler
 
+    //room
+    implementation deps.room.runtime
+    implementation deps.room.ktx
+    kapt deps.room.compiler
+
+
     //dagger
     implementation deps.dagger.android
     implementation deps.dagger.android_support

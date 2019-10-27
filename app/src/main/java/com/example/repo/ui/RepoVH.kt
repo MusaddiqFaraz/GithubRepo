@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.ShapeDrawable
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -50,5 +51,10 @@ class RepoVH ( view: View) : RecyclerView.ViewHolder(view) {
 }
 
 fun Drawable.setTint(color: String) {
-    (this as GradientDrawable).setColor(Color.parseColor(color))
+    try {
+        (this as GradientDrawable).setColor(Color.parseColor(color))
+    } catch (ex: IllegalAccessException) {
+        ex.printStackTrace()
+    }
+
 }
