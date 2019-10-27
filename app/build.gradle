@@ -43,6 +43,10 @@ dependencies {
     implementation deps.lifecycle.livedata
     implementation deps.lifecycle.viewmodel
 
+    //glide
+    implementation deps.glide.core
+    kapt deps.glide.compiler
+
     //dagger
     implementation deps.dagger.android
     implementation deps.dagger.android_support

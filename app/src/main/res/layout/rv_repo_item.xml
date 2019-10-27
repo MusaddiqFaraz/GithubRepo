@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/llSummary"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/size_medium"
+            android:layout_height="@dimen/size_medium"
+            android:id="@+id/ivAvatar"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:src="@drawable/ic_dummy_profile"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_xlarge"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/spacing_medium"
+            >
+
+
+
+            <TextView
+                style="@style/TextHeading"
+                tools:text="John"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:id="@+id/tvAuthor"
+                />
+
+            <TextView
+                style="@style/TextSubHeading"
+                tools:text="John"
+                android:id="@+id/tvRepoName"
+                android:layout_marginTop="@dimen/spacing_xsmall"
+
+                />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rlDetails"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginStart="@dimen/size_xlarge"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:layout_below="@+id/llSummary"
+            >
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TextDetails"
+                android:textAlignment="viewStart"
+                android:id="@+id/tvDesc"
+                />
+
+            <TextView
+                style="@style/TextSmall"
+                android:layout_below="@+id/tvDesc"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:drawableStart="@drawable/circle_bg_language_indicator"
+                android:drawablePadding="@dimen/spacing_xsmall"
+                android:id="@+id/tvLanguage"
+                tools:text="Java"
+                />
+
+            <TextView
+                style="@style/TextSmall"
+                android:layout_below="@+id/tvDesc"
+                android:layout_toEndOf="@id/tvLanguage"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:id="@+id/tvStars"
+                android:drawableStart="@drawable/star_yellow_16"
+                android:drawablePadding="@dimen/spacing_xsmall"
+                tools:text="14321"/>
+
+            <TextView
+                style="@style/TextSmall"
+                android:layout_below="@+id/tvDesc"
+                android:layout_toEndOf="@id/tvStars"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:id="@+id/tvForks"
+                android:drawableStart="@drawable/fork_black_16"
+                android:drawablePadding="@dimen/spacing_xsmall"
+                tools:text="4361"/>
+
+
+        </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/view_xxsmall"
+        android:background="@color/color_border"
+        android:layout_below="@id/rlDetails"
+        />
+
+
+</RelativeLayout>

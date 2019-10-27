@@ -1,6 +1,6 @@
 package com.example.repo.di.modules
 
-import com.example.repo.MainActivity
+import com.example.repo.ui.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

@@ -34,5 +34,21 @@
     </style>
 
 
+    <style name="TextTitle" parent="WrapStyle">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/textsize_xlarge</item>
+        <item name="android:textColor">@color/color_text_title</item>
+    </style>
+
+
+    <style name="TextDetails">
+        <item name="android:fontFamily">@font/pingfang_sc_regular</item>
+        <item name="android:textSize">@dimen/textsize_small</item>
+    </style>
+
+    <style name="TextSmall" parent="WrapStyle">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/textsize_small</item>
+    </style>
 
 </resources>
