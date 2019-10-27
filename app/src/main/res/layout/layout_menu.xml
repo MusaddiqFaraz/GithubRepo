@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rectangle_background">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/view_small"
+        android:background="?attr/selectableItemBackground"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/sort_by_stars"
+        android:gravity="center"
+        android:paddingStart="@dimen/spacing_medium"
+        android:paddingEnd="@dimen/spacing_medium"
+        android:id="@+id/sortByStars"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/view_small"
+        android:gravity="center"
+        android:background="?attr/selectableItemBackground"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/sort_by_name"
+        android:paddingStart="@dimen/spacing_medium"
+        android:paddingEnd="@dimen/spacing_medium"
+        android:id="@+id/sortByName"
+        />
+
+</LinearLayout>

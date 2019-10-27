@@ -4,6 +4,6 @@
     <string name="error_desc">An alien is probably blocking your signal</string>
     <string name="retry">RETRY</string>
     <string name="trending">Trending</string>
-    <style name="sort_by_name">Sort by name</style>
+    <string name="sort_by_name">Sort by name</string>
     <string name="sort_by_stars">Sort by stars</string>
 </resources>

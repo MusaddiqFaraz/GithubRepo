@@ -1,9 +1,13 @@
 package com.example.repo.ui
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,10 +18,13 @@ import com.example.repo.RVAdapter
 import com.example.repo.extensions.injectViewModel
 import com.example.repo.githubapi.Resource
 import com.example.repo.githubapi.TrendingRepo
+import com.example.repo.ui.SubMenuPopUp.Companion.NAME
+import com.example.repo.ui.SubMenuPopUp.Companion.STARS
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_loading_error.*
+import kotlinx.android.synthetic.main.layout_toolbar.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -44,6 +51,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     lateinit var coroutineScope: CoroutineScope
 
     private lateinit var mainVM: MainVM
+    private lateinit var subMenuPopUp: SubMenuPopUp
 
     private var selectedItem = -1
 
@@ -53,6 +61,16 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
         mainVM = injectViewModel(viewModelFactory)
 
+        subMenuPopUp = SubMenuPopUp(this,
+            (getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.layout_menu,null)){
+            when(it) {
+                STARS ->
+                    sortByStars()
+                NAME ->
+                    sortByNames()
+            }
+            subMenuPopUp.dismiss()
+        }
 
         updateRepoList()
         getTrendingRepo()
@@ -62,7 +80,16 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             getTrendingRepo(true)
         }
 
+        ivMore.setOnClickListener {
+            if(subMenuPopUp.isShowing)
+                subMenuPopUp.dismiss()
+            else
+                subMenuPopUp.showAtLocation(it,Gravity.TOP or Gravity.END,ivMore.width,toolbar.height)
+        }
+
     }
+
+
 
     private fun getTrendingRepo(forceFetch: Boolean = false) {
         mainVM.getTrendingRepos(forceFetch)?.observe(this, Observer {
@@ -97,6 +124,16 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 }
             }
         })
+    }
+
+    private fun sortByStars() {
+        trendingRepos.sortBy { it.stars }
+        repoAdapter.notifyDataSetChanged()
+    }
+
+    private fun sortByNames() {
+        trendingRepos.sortBy { it.name }
+        repoAdapter.notifyDataSetChanged()
     }
 
 
