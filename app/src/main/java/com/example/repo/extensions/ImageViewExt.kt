@@ -9,7 +9,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.example.repo.R
 
-fun ImageView.load(url: String, placeholder: Int = R.drawable.ic_dummy_profile) {
+fun ImageView.load(url: String, placeholder: Int = R.drawable.account_placeholder) {
 
 
     Glide.with(context)

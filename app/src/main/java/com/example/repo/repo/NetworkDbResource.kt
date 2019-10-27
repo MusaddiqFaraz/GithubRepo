@@ -34,13 +34,13 @@ fun <T, A> resultLiveData(databaseQuery: () -> LiveData<T>,
         emitSource(source)
 
 
+
         if(shouldFetch(dbValue)) {
             val responseStatus = networkCall()
             if (responseStatus.status == Resource.Status.SUCCESS) {
                 saveCallResult(responseStatus.data!!)
             } else if (responseStatus.status == Resource.Status.ERROR) {
                 emit(Resource.error<T>(responseStatus.message!!))
-                emitSource(source)
             }
         }
     }

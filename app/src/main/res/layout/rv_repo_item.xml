@@ -18,7 +18,7 @@
             android:id="@+id/ivAvatar"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/spacing_medium"
-            android:src="@drawable/ic_dummy_profile"
+            android:src="@drawable/account_placeholder"
             />
 
         <LinearLayout

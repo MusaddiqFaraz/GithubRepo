@@ -3,6 +3,7 @@ package com.example.repo.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,7 @@ import com.example.repo.githubapi.TrendingRepo
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.layout_loading_error.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -51,30 +53,41 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         mainVM = injectViewModel(viewModelFactory)
 
 
+        updateRepoList()
         getTrendingRepo()
+
 
 
     }
 
-    private fun getTrendingRepo() {
-        mainVM.trendingRepos.observe(this, Observer {
+    private fun getTrendingRepo(forceFetch: Boolean = false) {
+        mainVM.getTrendingRepos(forceFetch)?.observe(this, Observer {
             result ->
             when(result.status) {
                 Resource.Status.SUCCESS -> {
-                    Log.e(TAG,"success  ${result.data}  ")
+                    Log.e(TAG,"success  ${result.data?.size}  ")
 
                     CoroutineScope(Dispatchers.Main).launch {
                         result.data?.let {
+                            showUI(result.status)
                             trendingRepos.clear()
                             trendingRepos.addAll(it)
-                            updateRepoList()
+                            repoAdapter.notifyDataSetChanged()
                         }
                     }
 
                 }
-                Resource.Status.ERROR ,
+                Resource.Status.ERROR -> {
+                    Log.e(TAG,"error  ${result.message}  ")
+                    if (trendingRepos.isEmpty()) {
+                        showUI(result.status)
+                        btnRetry.setOnClickListener {
+                            getTrendingRepo(true)
+                        }
+                    }
+                }
                 Resource.Status.LOADING ->  {
-                    Log.e(TAG," ${result.message}  ")
+                    Log.e(TAG,"loading ${result.message}  ")
                 }
             }
         })
@@ -107,8 +120,12 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         rvList.layoutManager = LinearLayoutManager(this)
         rvList.adapter = repoAdapter
         repoAdapter.notifyDataSetChanged()
+    }
 
 
+    private fun showUI(status: Resource.Status) {
+        layoutError.visibility = if(status == Resource.Status.ERROR) View.VISIBLE else View.GONE
+        rvList.visibility = if(status == Resource.Status.SUCCESS) View.VISIBLE else View.GONE
     }
 
 
