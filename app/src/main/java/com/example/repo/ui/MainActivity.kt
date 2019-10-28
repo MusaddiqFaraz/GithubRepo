@@ -7,12 +7,9 @@ import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.repo.R
 import com.example.repo.RVAdapter
 import com.example.repo.extensions.injectViewModel
@@ -26,9 +23,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_loading_error.*
 import kotlinx.android.synthetic.main.layout_toolbar.*
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+
+
 
 class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
@@ -81,10 +79,11 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         }
 
         ivMore.setOnClickListener {
+
             if(subMenuPopUp.isShowing)
                 subMenuPopUp.dismiss()
             else
-                subMenuPopUp.showAtLocation(it,Gravity.TOP or Gravity.END,ivMore.width,toolbar.height)
+                subMenuPopUp.showAtLocation(it,Gravity.TOP or Gravity.END,ivMore.width,ivMore.bottom + statusBarHeight)
         }
 
     }
@@ -178,5 +177,13 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         }
     }
 
+    val statusBarHeight by lazy{
+        var result = 0
+        val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            result = resources.getDimensionPixelSize(resourceId)
+        }
+        result
+    }
 
 }
