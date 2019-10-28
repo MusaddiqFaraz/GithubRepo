@@ -16,4 +16,7 @@ interface RepoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(trendingRepos: List<TrendingRepo>)
 
+    @Query("DELETE FROM repos")
+    fun deletePreviousData()
+
 }

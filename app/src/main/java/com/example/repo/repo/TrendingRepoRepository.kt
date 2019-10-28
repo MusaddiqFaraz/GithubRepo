@@ -19,7 +19,10 @@ class TrendingRepoRepository @Inject constructor(private val repoDao: RepoDao,
     fun getTrendingRepo(forceFetch: Boolean = false) = resultLiveData(
         databaseQuery = { repoDao.getTrendingRepo() },
         networkCall = { gitHubRepoDataSource.getTrendingRepo() },
-        saveCallResult = { repoDao.insertAll(it) },
+        saveCallResult = {
+            repoDao.deletePreviousData()
+            repoDao.insertAll(it)
+        },
         shouldFetch = {
             /**
              * conditional check, this will return true
