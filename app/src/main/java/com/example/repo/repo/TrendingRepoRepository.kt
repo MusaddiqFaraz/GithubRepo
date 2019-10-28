@@ -2,11 +2,13 @@ package com.example.repo.repo
 
 import android.util.Log
 import androidx.lifecycle.distinctUntilChanged
+import com.example.repo.OpenForTesting
 import com.example.repo.db.RepoDao
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
+@OpenForTesting
 class TrendingRepoRepository @Inject constructor(private val repoDao: RepoDao,
                                                  private val gitHubRepoDataSource: GitHubRepoDataSource) {
 

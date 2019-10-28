@@ -5,6 +5,12 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-allopen'
+
+allOpen {
+    // allows mocking for classes w/o directly opening them for release builds
+    annotation 'com.example.repo.OpenClass'
+}
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -16,6 +22,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
     buildTypes {
         release {
@@ -74,11 +81,14 @@ dependencies {
     testImplementation deps.network.mock
     testImplementation deps.mockito.core
 
+    androidTestImplementation deps.support.annotations
     androidTestImplementation deps.test.core
     androidTestImplementation deps.test.runner
     androidTestImplementation deps.test.rules
+    androidTestImplementation deps.espresso.core
+    androidTestImplementation deps.espresso.contrib
 
-    androidTestImplementation deps.junit
+    androidTestImplementation deps.extJunit
     androidTestImplementation deps.network.mock
     androidTestImplementation deps.mockito.core
     androidTestImplementation deps.mockito.android
