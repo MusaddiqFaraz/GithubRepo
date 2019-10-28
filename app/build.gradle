@@ -21,7 +21,7 @@ android {
         targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.example.repo.utils.AppTestRunner"
 
     }
     buildTypes {
@@ -29,6 +29,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -39,6 +44,7 @@ dependencies {
     //support
     implementation deps.support.app_compat
     implementation deps.support.core_ktx
+    implementation deps.support.design
     implementation deps.constraint_layout
 
     //coroutines
@@ -75,24 +81,30 @@ dependencies {
     implementation deps.shimmer
 
     // Android Testing Support Library's runner and rules
-    testImplementation deps.arch_core.testing
     testImplementation deps.junit
     testImplementation deps.mock_web_server
-    testImplementation deps.network.mock
+    testImplementation deps.arch_core.testing
     testImplementation deps.mockito.core
+    testImplementation deps.network.mock
 
-    androidTestImplementation deps.support.annotations
-    androidTestImplementation deps.test.core
+
+    androidTestImplementation deps.constraint_layout
     androidTestImplementation deps.test.runner
     androidTestImplementation deps.test.rules
+    androidTestImplementation deps.test.ext_junit
+
+    androidTestImplementation deps.support.app_compat
+    androidTestImplementation deps.support.design
+    androidTestImplementation deps.support.recyclerview
+    androidTestImplementation deps.support.core_utils
+
     androidTestImplementation deps.espresso.core
     androidTestImplementation deps.espresso.contrib
 
-    androidTestImplementation deps.extJunit
-    androidTestImplementation deps.network.mock
+    androidTestImplementation deps.arch_core.testing
     androidTestImplementation deps.mockito.core
     androidTestImplementation deps.mockito.android
-    androidTestImplementation deps.arch_core.testing
+    androidTestImplementation deps.network.mock
 
 
 }
