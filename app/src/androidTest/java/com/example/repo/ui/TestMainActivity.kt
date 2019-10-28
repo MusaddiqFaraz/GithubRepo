@@ -34,6 +34,8 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.Mockito.mock
+import androidx.recyclerview.widget.RecyclerView
+import androidx.test.espresso.action.ViewActions
 
 
 @RunWith(AndroidJUnit4::class)
@@ -93,8 +95,12 @@ class TestMainActivity {
             assertEquals(Resource.success(data), getValue(mainVM.getTrendingRepos(false)!!))
         }
 
-
+        /*wait for ui to get inflated*/
+        Thread.sleep(200)
+        onView(withId(R.id.srlList)).check(matches(isDisplayed()))
     }
+
+
 
     @Test
     fun testErrorResult() {
@@ -111,11 +117,50 @@ class TestMainActivity {
 
 
 
-
-
     @Test
     fun checkRecyclerViewAlignment() {
         onView(withId(R.id.rvList)).check(isCompletelyBelow(withId(R.id.toolbar)))
+    }
+
+
+
+
+    @Test
+    fun checkRecyclerVH() {
+
+        if( getRVcount() <= 0) {
+            /*wait for ui to get inflated*/
+            Thread.sleep(200)
+        }
+
+        onView(RecyclerViewMatcher(R.id.rvList)
+            .atPositionOnView(0, R.id.rlRepo))
+            .check(matches(isDisplayed()))
+
+        /** perform click on first item */
+        onView(RecyclerViewMatcher(R.id.rvList)
+            .atPositionOnView(0, R.id.rlRepo)).perform(ViewActions.click())
+
+        /** check if item is in expanded state*/
+        RecyclerViewMatcher(R.id.rvList)
+            .atPositionOnView(0, R.id.rlDetails).matches(isDisplayed())
+
+    }
+
+    @Test
+    fun checkRecyclerViewCount() {
+
+        if( getRVcount() <= 0) {
+            /*wait for ui to get inflated*/
+            Thread.sleep(200)
+        }
+        onView(withId(R.id.rvList)).check(matches(hasItemCount(25)))
+    }
+
+    private fun getRVcount(): Int {
+        val recyclerView =
+            mActivityTestRule.activity.findViewById(R.id.rvList) as RecyclerView
+        return recyclerView.adapter!!.itemCount
     }
 
 
