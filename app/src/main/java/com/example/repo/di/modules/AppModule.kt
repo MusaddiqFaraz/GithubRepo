@@ -1,7 +1,7 @@
 package com.example.repo.di.modules
 
 import com.example.repo.githubapi.GithubApi
-import com.example.repo.repo.GitHubRepoDataSource
+import com.example.repo.repository.GitHubRepoDataSource
 import dagger.Module
 import dagger.Provides
 import kotlinx.coroutines.CoroutineScope

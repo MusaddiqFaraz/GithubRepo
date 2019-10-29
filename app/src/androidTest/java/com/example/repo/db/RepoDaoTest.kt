@@ -36,8 +36,10 @@ class RepoDaoTest : GithubDBTest() {
         }
     }
 
+
+    /** Test fetching of data from db using repo dao */
     @Test
-    fun testGetSets() {
+    fun testGetRepos() {
         val list = getValue(repoDao.getTrendingRepo())
         Assert.assertThat(list.size, equalTo(2))
 

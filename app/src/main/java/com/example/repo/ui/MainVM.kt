@@ -3,11 +3,9 @@ package com.example.repo.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.example.repo.OpenForTesting
-import com.example.repo.githubapi.GithubApi
 import com.example.repo.githubapi.Resource
 import com.example.repo.githubapi.TrendingRepo
-import com.example.repo.repo.GitHubRepoDataSource
-import com.example.repo.repo.TrendingRepoRepository
+import com.example.repo.repository.TrendingRepoRepository
 import javax.inject.Inject
 
 @OpenForTesting

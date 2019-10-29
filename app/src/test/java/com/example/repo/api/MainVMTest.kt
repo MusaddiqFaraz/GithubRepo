@@ -1,24 +1,17 @@
 package com.example.repo.api
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import com.example.repo.db.GithubAppDB
 import com.example.repo.db.RepoDao
 import com.example.repo.githubapi.GithubApi
-import com.example.repo.githubapi.Resource
-import com.example.repo.githubapi.TrendingRepo
-import com.example.repo.repo.GitHubRepoDataSource
-import com.example.repo.repo.TrendingRepoRepository
+import com.example.repo.repository.TrendingRepoRepository
 import com.example.repo.ui.MainVM
-import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.ArgumentMatchers
-import org.mockito.Mockito
 import org.mockito.Mockito.*
 
 @RunWith(JUnit4::class)

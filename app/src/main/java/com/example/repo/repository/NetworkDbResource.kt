@@ -1,6 +1,5 @@
-package com.example.repo.repo
+package com.example.repo.repository
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.example.repo.githubapi.Resource
 import kotlinx.coroutines.CompletableDeferred

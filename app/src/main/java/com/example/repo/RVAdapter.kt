@@ -32,16 +32,4 @@ open class RVAdapter<M,H : RecyclerView.ViewHolder> (private val context: Contex
     }
 
 
-    fun updateItems( results: MutableList<M>){
-
-        Log.d("BaseRvAdapter", "items: $items ")
-
-        items = results
-        notifyDataSetChanged()
-    }
-
-    fun getItemAt(position: Int): M {
-        return items[position]
-    }
-
 }

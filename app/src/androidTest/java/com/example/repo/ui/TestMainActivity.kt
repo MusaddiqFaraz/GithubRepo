@@ -1,17 +1,11 @@
 package com.example.repo.ui
 
-import android.view.View
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.PositionAssertions.isCompletelyBelow
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,25 +13,24 @@ import com.example.repo.R
 import com.example.repo.db.RepoDao
 import com.example.repo.githubapi.Resource
 import com.example.repo.githubapi.TrendingRepo
-import com.example.repo.repo.GitHubRepoDataSource
-import com.example.repo.repo.TrendingRepoRepository
+import com.example.repo.repository.TrendingRepoRepository
 import com.example.repo.utils.*
 import com.example.repo.utils.RecyclerViewMatcher.Companion.hasItemCount
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.runBlocking
-import org.hamcrest.CoreMatchers.not
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.runner.RunWith
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.Mockito.mock
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.action.ViewActions
 
 
+
+/** This should fail when run for the first time with no data,
+ *  This should pass when app is loaded with data,
+ *  Tested on Redmi note 7 pro */
 @RunWith(AndroidJUnit4::class)
 class TestMainActivity {
 
@@ -57,7 +50,6 @@ class TestMainActivity {
 
     private val trendingRepo = MutableLiveData<Resource<List<TrendingRepo>>>()
 
-    private val repoDao = mock<RepoDao>()
     private var trendingRepoRepository = mock(TrendingRepoRepository::class.java)
     private var mainVM = MainVM(trendingRepoRepository)
 
@@ -105,11 +97,11 @@ class TestMainActivity {
     @Test
     fun testErrorResult() {
 
-        val result = MutableLiveData<Resource<List<TrendingRepo>>>(Resource.error("Error occured"))
+        val result = MutableLiveData<Resource<List<TrendingRepo>>>(Resource.error("Error occurred"))
         `when`(trendingRepoRepository.getTrendingRepo(false)).thenReturn(result)
 
         mActivityTestRule.activity.runOnUiThread {
-            assertEquals(Resource.error<TrendingRepo>("Error occured"), getValue(mainVM.getTrendingRepos(false)!!))
+            assertEquals(Resource.error<TrendingRepo>("Error occurred"), getValue(mainVM.getTrendingRepos(false)!!))
         }
 
 
@@ -137,16 +129,17 @@ class TestMainActivity {
             .atPositionOnView(0, R.id.rlRepo))
             .check(matches(isDisplayed()))
 
-        /** perform click on first item */
+        /** Perform click on first item */
         onView(RecyclerViewMatcher(R.id.rvList)
             .atPositionOnView(0, R.id.rlRepo)).perform(ViewActions.click())
 
-        /** check if item is in expanded state*/
+        /** Check if item is in expanded state*/
         RecyclerViewMatcher(R.id.rvList)
             .atPositionOnView(0, R.id.rlDetails).matches(isDisplayed())
 
     }
 
+    /** The api provides 25 items in response, this test checks recyclerview count for that */
     @Test
     fun checkRecyclerViewCount() {
 
@@ -154,6 +147,7 @@ class TestMainActivity {
             /*wait for ui to get inflated*/
             Thread.sleep(200)
         }
+
         onView(withId(R.id.rvList)).check(matches(hasItemCount(25)))
     }
 

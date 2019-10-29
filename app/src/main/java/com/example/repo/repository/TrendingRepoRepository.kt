@@ -1,6 +1,5 @@
-package com.example.repo.repo
+package com.example.repo.repository
 
-import android.util.Log
 import androidx.lifecycle.distinctUntilChanged
 import com.example.repo.OpenForTesting
 import com.example.repo.db.RepoDao
@@ -13,7 +12,7 @@ class TrendingRepoRepository @Inject constructor(private val repoDao: RepoDao,
                                                  private val gitHubRepoDataSource: GitHubRepoDataSource) {
 
 
-    /** time to leave is set to 2 hours  as per requirement*/
+    /** Time to leave is set to 2 hours  as per requirement*/
     private val ttl = 2 * 60 * 60 * 1000
 
     fun getTrendingRepo(forceFetch: Boolean = false) = resultLiveData(
@@ -25,7 +24,7 @@ class TrendingRepoRepository @Inject constructor(private val repoDao: RepoDao,
         },
         shouldFetch = {
             /**
-             * conditional check, this will return true
+             * Conditional check, this will return true
              * 1. if first time db is empty
              * 2. when db data is 2 hours old
              * 3. when user performs swipe to refresh

@@ -1,4 +1,4 @@
-package com.example.repo.repo
+package com.example.repo.repository
 
 import com.example.repo.OpenForTesting
 import com.example.repo.githubapi.DataSource

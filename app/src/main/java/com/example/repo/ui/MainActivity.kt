@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
           val TAG = "MainActivity"
     }
 
-    lateinit var repoAdapter: RVAdapter<TrendingRepo,RepoVH>
+    private lateinit var repoAdapter: RVAdapter<TrendingRepo,RepoVH>
     private var trendingRepos = ArrayList<TrendingRepo>()
 
     @Inject
@@ -45,8 +45,6 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    @Inject
-    lateinit var coroutineScope: CoroutineScope
 
     private lateinit var mainVM: MainVM
     private lateinit var subMenuPopUp: SubMenuPopUp
@@ -178,7 +176,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         }
     }
 
-    val statusBarHeight by lazy{
+    private val statusBarHeight by lazy{
         var result = 0
         val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
         if (resourceId > 0) {

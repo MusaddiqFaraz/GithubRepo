@@ -18,7 +18,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito
 
-/** This is a special case which needs to be tested only first time when there is no data in db and device is not connected to internet */
+/** This is a special case which needs to be tested only first time
+ *  when there is no data in db and device is not connected to internet,
+ *  this should fail if tried in presence of internet or data is already fetched beforehand */
 @RunWith(AndroidJUnit4::class)
 class MainActivityError {
 

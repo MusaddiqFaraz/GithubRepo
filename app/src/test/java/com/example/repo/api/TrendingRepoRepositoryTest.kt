@@ -4,8 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.repo.db.GithubAppDB
 import com.example.repo.db.RepoDao
 import com.example.repo.githubapi.GithubApi
-import com.example.repo.repo.GitHubRepoDataSource
-import com.example.repo.repo.TrendingRepoRepository
+import com.example.repo.repository.GitHubRepoDataSource
+import com.example.repo.repository.TrendingRepoRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
@@ -15,7 +15,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.ArgumentMatchers
-import org.mockito.Mockito
 import org.mockito.Mockito.*
 
 @RunWith(JUnit4::class)
