@@ -22,7 +22,7 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-        testInstrumentationRunner "com.example.repo.utils.AppTestRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
     buildTypes {
@@ -103,6 +103,10 @@ dependencies {
     androidTestImplementation deps.support.design
     androidTestImplementation deps.support.recyclerview
     androidTestImplementation deps.support.core_utils
+
+    androidTestImplementation deps.espresso.core
+    androidTestImplementation deps.espresso.contrib
+    androidTestImplementation deps.espresso.intents
 
 
     androidTestImplementation deps.arch_core.testing

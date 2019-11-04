@@ -87,13 +87,14 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     }
 
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
+        Log.e(TAG," called ")
         getTrendingRepo(false)
     }
 
 
-    private fun getTrendingRepo(forceFetch: Boolean = false) {
+    fun getTrendingRepo(forceFetch: Boolean = false) {
         mainVM.getTrendingRepos(forceFetch)?.observe(this, Observer {
             result ->
             when(result.status) {

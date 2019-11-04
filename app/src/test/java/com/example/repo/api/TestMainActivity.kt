@@ -30,6 +30,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.android.controller.ActivityController
 
 
+
 @RunWith(RobolectricTestRunner::class)
 class TestMainActivity {
 
@@ -72,9 +73,9 @@ class TestMainActivity {
         activity.setTestViewModel(mainVM)
 
         /**
-         * Drive our activity to started state
+         * Drive our activity to resume state
          * */
-        activityController.start()
+        activityController.resume()
 
 
 
