@@ -21,6 +21,7 @@ android {
         targetSdkVersion build_versions.target_sdk
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "com.example.repo.utils.AppTestRunner"
 
     }
@@ -28,6 +29,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
         }
     }
 
@@ -86,7 +92,7 @@ dependencies {
     testImplementation deps.arch_core.testing
     testImplementation deps.mockito.core
     testImplementation deps.network.mock
-
+    testImplementation deps.robolectric
 
     androidTestImplementation deps.constraint_layout
     androidTestImplementation deps.test.runner
@@ -98,8 +104,6 @@ dependencies {
     androidTestImplementation deps.support.recyclerview
     androidTestImplementation deps.support.core_utils
 
-    androidTestImplementation deps.espresso.core
-    androidTestImplementation deps.espresso.contrib
 
     androidTestImplementation deps.arch_core.testing
     androidTestImplementation deps.mockito.core

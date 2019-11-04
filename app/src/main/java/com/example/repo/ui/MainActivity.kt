@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         }
 
         updateRepoList()
-        getTrendingRepo()
+
 
         srlList.setOnRefreshListener {
             srlList.isRefreshing = true
@@ -86,6 +86,11 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     }
 
+
+    override fun onStart() {
+        super.onStart()
+        getTrendingRepo(false)
+    }
 
 
     private fun getTrendingRepo(forceFetch: Boolean = false) {
@@ -183,6 +188,10 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             result = resources.getDimensionPixelSize(resourceId)
         }
         result
+    }
+
+    fun setTestViewModel(viewModel: MainVM) {
+        mainVM = viewModel
     }
 
 }
